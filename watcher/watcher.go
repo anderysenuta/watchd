@@ -27,7 +27,7 @@ func Subscribe(channel chan string, path string) {
 		}
 	}()
 
-	// run command on start
+	// send init event to run command on start
 	channel <- InitEvent
 
 	for {

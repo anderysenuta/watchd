@@ -21,7 +21,7 @@ func main() {
 
 	path, err := os.Getwd()
 	if err != nil {
-		log.Fatalf("Root folder not found: %v,\n", err)
+		log.Fatalf("Folder not found: %v,\n", err)
 	}
 
 	go watcher.Subscribe(events, path)
