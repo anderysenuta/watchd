@@ -23,4 +23,4 @@ jobs:
         with:
           ref: ${{ github.event.inputs.branch }}
       - name: Run custom job
-        run: echo "Running custom job: ${{ github.event.inputs.job_name }}"
+        run: echo "Running custom job"
