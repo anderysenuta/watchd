@@ -1,22 +1,22 @@
-# .github/workflows/manual-patch-run.yml
-name: Run Patch Job Manually
+name: Manual Patch Job
 
 on:
   workflow_dispatch:
     inputs:
       branch:
-        description: 'Укажи ветку вида patch/**'
+        description: 'Укажи имя ветки (только patch/**)'
         required: true
 
 jobs:
   validate-and-run:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Проверка имени ветки
+      - name: Проверка ветки
         run: |
-          echo "Ветка: ${{ github.event.inputs.branch }}"
+          echo "🔎 Ветка для запуска: ${{ github.event.inputs.branch }}"
           if [[ "${{ github.event.inputs.branch }}" != patch/* ]]; then
-            echo "❌ Ветка должна начинаться с 'patch/'"
+            echo "❌ Ошибка: ветка должна начинаться с 'patch/'"
             exit 1
           fi
           echo "✅ Ветка прошла проверку"
@@ -26,6 +26,7 @@ jobs:
         with:
           ref: ${{ github.event.inputs.branch }}
 
-      - name: Выполнить кастомную задачу
+      - name: Выполнение кастомного действия
         run: |
-          echo "Выполняем job для ветки ${{ github.event.inputs.branch }}"
+          echo "🚀 Запуск задачи на ветке ${{ github.event.inputs.branch }}"
+          # Вставь свою кастомную логику сюда
