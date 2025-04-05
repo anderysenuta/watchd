@@ -1,32 +1,26 @@
+name: Patch workflow process
+
 on:
   workflow_dispatch:
     inputs:
-      logLevel:
-        description: 'Log level'
+      branch:
+        description: 'Select patch branch'
         required: true
-        default: 'warning'
-        type: choice
-        options:
-          - info
-          - warning
-          - debug
-      print_tags:
-        description: 'True to print to STDOUT'
-        required: true
-        type: boolean
-      tags:
-        description: 'Test scenario tags'
+        default: 'patch/*'
+        type: string
+      job_name:
+        description: 'Name of the custom job to run'
         required: true
         type: string
-      environment:
-        description: 'Environment to run tests against'
-        type: environment
-        required: true
 
 jobs:
-  print-tag:
+  custom-job:
     runs-on: ubuntu-latest
-    if: ${{ inputs.print_tags }} 
+    if: ${{ github.event.inputs.branch != '' }}
     steps:
-      - name: Print the input tag to STDOUT
-        run: echo  The tags are ${{ inputs.tags }} 
+      - name: Check out the repository
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.inputs.branch }}
+      - name: Run custom job
+        run: echo "Running custom job: ${{ github.event.inputs.job_name }}"
