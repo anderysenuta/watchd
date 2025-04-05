@@ -2,25 +2,26 @@ name: Patch workflow process
 
 on:
   workflow_dispatch:
+    
     inputs:
       branch:
         description: 'Select patch branch'
         required: true
         default: 'patch/*'
         type: string
-      job_name:
-        description: 'Name of the custom job to run'
-        required: true
-        type: string
+      # job_name:
+      #   description: 'Name of the custom job to run'
+      #   required: true
+      #   type: string
 
-jobs:
-  custom-job:
-    runs-on: ubuntu-latest
-    if: ${{ github.event.inputs.branch != '' }}
-    steps:
-      - name: Check out the repository
-        uses: actions/checkout@v2
-        with:
-          ref: ${{ github.event.inputs.branch }}
-      - name: Run custom job
-        run: echo "Running custom job"
+# jobs:
+#   custom-job:
+#     runs-on: ubuntu-latest
+#     if: ${{ github.event.inputs.branch != '' }}
+#     steps:
+#       - name: Check out the repository
+#         uses: actions/checkout@v2
+#         with:
+#           ref: ${{ github.event.inputs.branch }}
+#       - name: Run custom job
+#         run: echo "Running custom job"
