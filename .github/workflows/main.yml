@@ -6,11 +6,16 @@ jobs:
   log-the-inputs:
     runs-on: ubuntu-latest
     steps:
-      - run: |
-          echo "Log level: $LEVEL"
-          echo "Tags: $TAGS"
-          echo "Environment: $ENVIRONMENT"
-        env:
-          LEVEL: ${{ inputs.logLevel }}
-          TAGS: ${{ inputs.tags }}
-          ENVIRONMENT: ${{ inputs.environment }}
+      - name: Check patch branch
+        run: |
+          echo "Patch workflow was run on: ${{ github.event.inputs.branch }}"
+          if [[ "${{ github.event.inputs.branch }}" != patch/* ]]; then
+            echo "Error: patch branch name shoud start from 'patch/'"
+            exit 1
+          fi
+          
+      - name: Run gcp trigger
+        run: |
+          echo "🚀 Запуск задачи на ветке ${{ github.event.inputs.branch }}"
+          # Вставь свою кастомную логику сюда
+    
