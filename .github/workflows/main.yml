@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  log-the-inputs:
+  gcp_trigger:
     runs-on: ubuntu-latest
     steps:
       - name: Check patch branch
@@ -13,9 +13,8 @@ jobs:
             echo "Error: patch branch name shoud start from 'patch/'"
             exit 1
           fi
-          
+
       - name: Run gcp trigger
         run: |
           echo "🚀 Запуск задачи на ветке ${{ github.event.inputs.branch }}"
           # Вставь свою кастомную логику сюда
-    
