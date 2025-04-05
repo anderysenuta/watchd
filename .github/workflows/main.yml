@@ -1,3 +1,4 @@
+name: Patch workflow
 on:
   workflow_dispatch:
 
